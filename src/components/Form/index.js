@@ -3,6 +3,8 @@ import React, { useState } from "react"
 import { Checkbox, Input, Radio } from "./Inputs"
 import { Select } from "./Select"
 
+import api from 'api'
+
 export const Form = () => {
   const [firstName, setFirstName] = useState('')
   const [firstNameError, setFirstNameError] = useState('')
@@ -136,8 +138,16 @@ export const Form = () => {
 
 const handleSubmit = (event) => {
   event.preventDefault()
+  // dont do anything if there are errors
   if (!firstNameError && !lastNameError && !emailError) {
-
+    api.addTravel({
+      firstName,
+      lastName,
+      email,
+      gender,
+      destination,
+      dietRestrictions: {isVegan, isLactoseFree}
+    })
   }
 }
 
@@ -180,7 +190,6 @@ const handleSubmit = (event) => {
           />
         ))}
       </div>
-
       <button className="button mt-3">Submit</button>
     </form>
   )
