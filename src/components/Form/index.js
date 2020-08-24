@@ -54,15 +54,18 @@ export const Form = () => {
     {
       id: "fName",
       placeholder: "First Name",
+      error: firstNameError,
     },
     {
       id: "lName",
       placeholder: "Last Name",
+      error: lastNameError,
     },
     {
       id: "email",
       placeholder: "Email",
-      type: "email"
+      type: "email",
+      error: emailError,
     },
   ]
 
@@ -95,8 +98,9 @@ export const Form = () => {
   return (
     <form className="center">
       <div className="grid mt-3">
-        {textInputs.map(({ id, placeholder }, i) => (
+        {textInputs.map(({ id, placeholder, error }, i) => (
           <Input
+          error={error}
             handler={handleChange}
             id={id}
             key={i}
