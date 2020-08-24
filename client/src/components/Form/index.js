@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, Fragment } from "react"
 
 import { Checkbox, Input, Radio } from "./Inputs"
 import { Select } from "./Select"
@@ -136,11 +136,15 @@ export const Form = () => {
     }
   }
 
-const handleSubmit = (event) => {
+  const handleClick = async () => {
+    const res = await api.deleteAllTravels()
+  }
+
+const handleSubmit = async (event) => {
   event.preventDefault()
   // dont do anything if there are errors
   if (!firstNameError && !lastNameError && !emailError) {
-    api.addTravel({
+    const res = await api.addTravel({
       firstName,
       lastName,
       email,
@@ -148,12 +152,14 @@ const handleSubmit = (event) => {
       destination,
       dietRestrictions: {isVegan, isLactoseFree}
     })
+    console.log(res)
   }
 }
 
 
 
   return (
+    <>
     <form className="center" onSubmit={handleSubmit}>
       <div className="grid mt-3">
         {textInputs.map(({ id, placeholder, error }, i) => (
@@ -190,7 +196,12 @@ const handleSubmit = (event) => {
           />
         ))}
       </div>
-      <button className="button mt-3">Submit</button>
+      <button className="button is-primary mt-3">Submit</button>
     </form>
+
+
+    <button className='button is-danger' onClick={handleClick}>Delete</button>
+    </>
+
   )
 }

@@ -2,10 +2,18 @@ import client from './client';
 
 export const addTravel = async (newTravel) => {
   try {
-    return await client.db('Travel').collection('travel').insertOne(newTravel);
+    const insertRes = await client.db('Travel').collection('travel').insertOne(newTravel);
+    return insertRes;
   } catch (err) {
     console.log(err);
   }
 };
 
-export default addTravel;
+export const deleteAllTravels = async () => {
+  try {
+    const delRes = await client.db('Travel').collection('travel').remove();
+    return delRes;
+  } catch (err) {
+    console.log(err);
+  }
+};
