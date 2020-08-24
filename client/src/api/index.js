@@ -2,11 +2,11 @@ export default {
   addTravel(newTravel) {
     fetch('http://localhost:5000/travel/add', {
       method: 'POST',
-      header: {
+      headers: {
         "Content-Type": "application/json"
       },
       // Turn 'newTravel' JS object into actual JSON
-      body: JSON.stringify(newTravel)
+      body: JSON.stringify(newTravel),
     })
   },
   deleteAllTravels() {
