@@ -71,7 +71,13 @@ export const Form = () => {
 
 
   const validator = {
-    validateEmails() {
+    validateEmails(val) {
+
+      const emailRe = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i)
+      return (
+        (val && emailRe.test(val)) ||
+      "Email must be non-empty and valid"
+      )
 
     },
 
@@ -85,7 +91,6 @@ export const Form = () => {
       )
     },
   }
-
 
   const handleChange = ({ target: { id, value, checked } }) => {
     switch (id) {
@@ -106,7 +111,13 @@ export const Form = () => {
         }
         break
       case "email":
-        setEmail(value)
+        setEmailError('')
+        if (typeof validator.validateEmails(value) === 'string') {
+          setEmailError(validator.validateEmails(value))
+        } else {
+          setEmail(value)
+        }
+
         break
       case "destination":
         setDestination(value)
