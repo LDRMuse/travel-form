@@ -9,7 +9,7 @@ export const Input = ({ id, placeholder, type, handler, error }) => (
     <div className="control">
       <input type={type} id={id} onChange={handler} />
     </div>
-    {error ? <p className='help is-danger'></p> : null}
+    {error ? <p className='help is-danger'>{error}</p> : null}
   </div>
 )
 

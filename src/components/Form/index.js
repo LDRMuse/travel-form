@@ -69,10 +69,33 @@ export const Form = () => {
     },
   ]
 
+
+  const validator = {
+    validateEmails() {
+
+    },
+
+    validateNames(val) {
+      // Letters Only RegExp - 'start with letters only (unlimited) through the end of the string'
+      const lettersRe = new RegExp(/^[a-zA-Z]+$/g)
+      // Non-empty and less than 15 characters
+      return (
+        (val && lettersRe.test(val)) ||
+        "Name must be non-empty and letters only "
+        )
+    },
+  }
+
+
   const handleChange = ({ target: { id, value, checked } }) => {
     switch (id) {
       case "fName":
-        setFirstName(value)
+        setFirstNameError('')
+        if (typeof validator.validateNames(value) === 'string') {
+          setFirstNameError(validator.validateNames(value))
+        } else {
+          setFirstName(value)
+        }
         break
       case "lName":
         setLastName(value)
@@ -100,7 +123,7 @@ export const Form = () => {
       <div className="grid mt-3">
         {textInputs.map(({ id, placeholder, error }, i) => (
           <Input
-          error={error}
+            error={error}
             handler={handleChange}
             id={id}
             key={i}
