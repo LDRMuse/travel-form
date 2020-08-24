@@ -82,7 +82,7 @@ export const Form = () => {
       return (
         (val && lettersRe.test(val)) ||
         "Name must be non-empty and letters only "
-        )
+      )
     },
   }
 
@@ -98,7 +98,12 @@ export const Form = () => {
         }
         break
       case "lName":
-        setLastName(value)
+        setLastNameError('')
+        if (typeof validator.validateNames(value) === 'string') {
+          setLastNameError(validator.validateNames(value))
+        } else {
+          setLastName(value)
+        }
         break
       case "email":
         setEmail(value)
