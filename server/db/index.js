@@ -17,3 +17,12 @@ export const deleteAllTravels = async () => {
     console.log(err);
   }
 };
+
+export const loginTravel = async () => {
+  try {
+    const findRes = await client.db('Travel').collection('travel').find();
+    return findRes;
+  } catch (err) {
+    console.log(err);
+  }
+};

@@ -18,7 +18,7 @@ export default {
   },
 
   async loginEmail() {
-    const loginEmailRes = await fetch("http://localhost:5000/login", {
+    const loginEmailRes = await fetch("http://localhost:5000/travel/login", {
       method: 'GET',
   })
     return await loginEmailRes.json()
