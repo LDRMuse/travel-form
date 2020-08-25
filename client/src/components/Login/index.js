@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export const Login = () => {
+export const Login = ({loginButton}) => {
   return (
-    <form>
+    <form onSubmit={loginButton}>
       <label htmlFor="email"></label>
         <input type="email" placeholder="Email"></input>
         <button className="button is-warning mt-3">Get Travel Plans</button>
@@ -12,6 +12,5 @@ export const Login = () => {
 }
 
 Login.propTypes = {
-  value: PropTypes.string.isRequired,
-  id: PropTypes.string,
+  loginButton: PropTypes.func,
 }
