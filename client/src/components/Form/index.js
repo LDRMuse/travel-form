@@ -196,11 +196,14 @@ const handleSubmit = async (event) => {
           />
         ))}
       </div>
+      <div className="has-text-centered mt-2">
       <button className="button is-primary mt-3">Submit</button>
+      </div>
     </form>
 
-
+    <div className="has-text-centered mt-2">
     <button className='button is-danger' onClick={handleClick}>Delete</button>
+    </div>
     </>
 
   )
