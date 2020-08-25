@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
-import {Header, Form} from "./components"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
 import { Header, Form, Login } from "./components"
+
 import "./App.css";
 
 export const App = () => (
