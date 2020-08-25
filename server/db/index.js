@@ -18,10 +18,10 @@ export const deleteAllTravels = async () => {
   }
 };
 
-export const showTravels = async () => {
+export const showTravels = async (email) => {
   try {
-    const findRes = await client.db('Travel').collection('travel').find();
-    return findRes;
+    const showRes = await client.db('Travel').collection('travel').find({ email }).toArray();
+    return showRes;
   } catch (err) {
     console.log(err);
   }

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { addTravel, deleteAllTravels } from '../db';
+import { addTravel, deleteAllTravels, showTravels } from '../db';
 
 const router = new Router();
 
@@ -17,6 +17,12 @@ router.post('/add', async ({ body }, res) => {
 
 router.delete('/delete', async (_, res) => {
   const dbRes = await deleteAllTravels();
+  res.status(200);
+  res.json(dbRes);
+});
+
+router.post('/show', async ({ body: { email } }, res) => {
+  const dbRes = await showTravels(email);
   res.status(200);
   res.json(dbRes);
 });
