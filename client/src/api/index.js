@@ -1,20 +1,29 @@
 export default {
   async addTravel(newTravel) {
-    const res = await fetch('http://localhost:5000/travel/add', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      // Turn 'newTravel' JS object into actual JSON
-      body: JSON.stringify(newTravel),
-    })
-    return await res.json()
+    try {
+      const res = await fetch('http://localhost:5000/travel/add', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        // Turn 'newTravel' JS object into actual JSON
+        body: JSON.stringify(newTravel),
+      })
+      return await res.json()
+    } catch (error) {
+      throw new Error(error)
+    }
+
   },
   async deleteAllTravels() {
-    const res = await fetch('http://localhost:5000/travel/delete', {
-      method: 'DELETE',
-    })
-    return await res.json()
+    try {
+      const res = await fetch('http://localhost:5000/travel/delete', {
+        method: 'DELETE',
+      })
+      return await res.json()
+    } catch (error) {
+      throw new Error(error)
+    }
   },
 
   async showTravels(email) {
