@@ -2,14 +2,14 @@ import React from 'react';
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
-import { Header, Form, LoginTable, Success } from "./components"
+import { Header, Form, LoginTable, Success, Error } from "./components"
 
 import "./App.css";
 
 export const App = () => (
   <Router>
+        <Header />
     <Route exact={true} path="/">
-      <Header />
       <Form />
     </Route>
 
@@ -22,6 +22,12 @@ export const App = () => (
     <Switch>
       <Route path='/success'>
       <Success />
+      </Route>
+    </Switch>
+
+    <Switch>
+      <Route path='/error'>
+      <Error />
       </Route>
     </Switch>
 </Router>

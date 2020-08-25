@@ -160,6 +160,9 @@ export const Form = () => {
         .then(() => {
           history.push('/success')
         })
+        .catch((e) => {
+          history.push('/error', { error: new Error(e)})
+        })
     }
   }
 
