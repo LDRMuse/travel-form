@@ -1,9 +1,15 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-export const Login = ({loginButton}) => {
+
+export const Login = () => {
+
+  const travelButton = (event) => {
+    event.preventDefault()
+console.log('here i am')
+
+  }
   return (
-    <form onSubmit={loginButton}>
+    <form onSubmit={travelButton}>
       <label htmlFor="email"></label>
         <input type="email" placeholder="Email"></input>
         <button className="button is-warning mt-3">Get Travel Plans</button>
@@ -11,6 +17,3 @@ export const Login = ({loginButton}) => {
   )
 }
 
-Login.propTypes = {
-  loginButton: PropTypes.func,
-}
