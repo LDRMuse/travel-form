@@ -1,11 +1,16 @@
-import React, { useState, Fragment } from "react"
+import React, { useState } from "react"
+import { useHistory } from 'react-router-dom'
 
 import { Checkbox, Input, Radio } from "./Inputs"
 import { Select } from "./Select"
 
+
 import api from 'api'
 
 export const Form = () => {
+  const history = useHistory()
+
+
   const [firstName, setFirstName] = useState('')
   const [firstNameError, setFirstNameError] = useState('')
   const [lastName, setLastName] = useState("")
@@ -78,7 +83,7 @@ export const Form = () => {
       const emailRe = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i)
       return (
         (val && emailRe.test(val)) ||
-      "Email must be non-empty and valid"
+        "Email must be non-empty and valid"
       )
 
     },
@@ -140,70 +145,72 @@ export const Form = () => {
     const res = await api.deleteAllTravels()
   }
 
-const handleSubmit = async (event) => {
-  event.preventDefault()
-  // dont do anything if there are errors
-  if (!firstNameError && !lastNameError && !emailError) {
-    const res = await api.addTravel({
-      firstName,
-      lastName,
-      email,
-      gender,
-      destination,
-      dietRestrictions: {isVegan, isLactoseFree}
-    })
-    console.log(res)
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    // dont do anything if there are errors
+    if (!firstNameError && !lastNameError && !emailError) {
+      api.addTravel({
+        firstName,
+        lastName,
+        email,
+        gender,
+        destination,
+        dietRestrictions: { isVegan, isLactoseFree }
+      })
+        .then(() => {
+          history.push('/success')
+        })
+    }
   }
-}
 
 
 
   return (
     <>
-    <form className="center" onSubmit={handleSubmit}>
-      <div className="grid mt-3">
-        {textInputs.map(({ id, placeholder, error }, i) => (
-          <Input
-            error={error}
-            handler={handleChange}
-            id={id}
-            key={i}
-            placeholder={placeholder}
-          />
-        ))}
-        <Select selections={destinations} handler={handleChange} />
-      </div>
+      <form className="center" onSubmit={handleSubmit}>
+        <div className="grid mt-3">
+          {textInputs.map(({ id, placeholder, error }, i) => (
+            <Input
+              error={error}
+              handler={handleChange}
+              id={id}
+              key={i}
+              placeholder={placeholder}
+            />
+          ))}
+          <Select selections={destinations} handler={handleChange} />
+        </div>
 
-      <div className="flex flex--justify-space-around">
-        {genderInputs.map(({ name, value }, i) => (
-          <Radio
-            checked={gender === value}
-            name={name}
-            value={value}
-            handler={handleChange}
-            key={i}
-          />
-        ))}
+        <div className="flex flex--justify-space-around">
+          {genderInputs.map(({ name, value }, i) => (
+            <Radio
+              checked={gender === value}
+              name={name}
+              value={value}
+              handler={handleChange}
+              key={i}
+            />
+          ))}
 
-        {dietaryRestrictions.map(({ checked, id, label, value }, i) => (
-          <Checkbox
-            id={id}
-            label={label}
-            value={value}
-            handler={handleChange}
-            checked={checked}
-            key={i}
-          />
-        ))}
-      </div>
+          {dietaryRestrictions.map(({ checked, id, label, value }, i) => (
+            <Checkbox
+              id={id}
+              label={label}
+              value={value}
+              handler={handleChange}
+              checked={checked}
+              key={i}
+            />
+          ))}
+        </div>
+        <div className="has-text-centered mt-2">
+          <button className="button is-primary mt-3">Submit</button>
+        </div>
+      </form>
+
       <div className="has-text-centered mt-2">
-      <button className="button is-primary mt-3">Submit</button>
+        <button className='button is-danger' onClick={handleClick}>Delete</button>
       </div>
-    </form>
-
-    <div className="has-text-centered mt-2">
-    <button className='button is-danger' onClick={handleClick}>Delete</button>
-    </div>
     </>
 
   )
