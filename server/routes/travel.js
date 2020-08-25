@@ -9,10 +9,14 @@ router.get('/', (_, res) => {
 });
 
 router.post('/add', async ({ body }, res) => {
-  console.log(body);
-  const dbRes = await addTravel(body);
-  res.status(201);
-  res.json(dbRes);
+  try {
+    const dbRes = await addTravel(body);
+    res.status(201);
+    res.json(dbRes);
+  } catch (error) {
+    error.message = 'Database Error';
+    res.status(500).send(error);
+  }
 });
 
 router.delete('/delete', async (_, res) => {

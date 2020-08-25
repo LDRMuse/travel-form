@@ -5,7 +5,7 @@ export const addTravel = async (newTravel) => {
     const insertRes = await client.db('Travel').collection('travel').insertOne(newTravel);
     return insertRes;
   } catch (err) {
-    console.log(err);
+    throw new Error(err);
   }
 };
 
