@@ -157,12 +157,12 @@ export const Form = () => {
         destination,
         dietRestrictions: { isVegan, isLactoseFree }
       })
-        .then(() => {
-          history.push('/success')
-        })
-        .catch((e) => {
-          history.push('/error', { error: e })
-        })
+      .then(() => {
+        history.push('/feedback', {success: true})
+      })
+      .catch((e) => {
+        history.push('/feedback', { error: e })
+      })
     }
   }
 

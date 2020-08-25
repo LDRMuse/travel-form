@@ -2,7 +2,7 @@ import React from 'react';
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
-import { Header, Form, LoginTable, Success, Error } from "./components"
+import { Header, Form, LoginTable, Feedback} from "./components"
 
 import "./App.css";
 
@@ -20,16 +20,11 @@ export const App = () => (
     </Switch>
 
     <Switch>
-      <Route path='/success'>
-      <Success />
+      <Route path='/feedback'>
+      <Feedback />
       </Route>
     </Switch>
 
-    <Switch>
-      <Route path='/error'>
-      <Error />
-      </Route>
-    </Switch>
 </Router>
 )
 
