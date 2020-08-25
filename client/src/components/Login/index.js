@@ -1,10 +1,12 @@
 import React from 'react'
 
+import api from "api"
 
 export const Login = () => {
 
-  const travelButton = (event) => {
+  const travelButton = async (event) => {
     event.preventDefault()
+    const res = await api.loginEmail({email: event.target.value})
 console.log('here i am')
 
   }

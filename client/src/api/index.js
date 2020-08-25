@@ -15,7 +15,15 @@ export default {
       method: 'DELETE',
     })
     return await res.json()
-  }
+  },
+
+  async loginEmail() {
+    const loginEmailRes = await fetch("http://localhost:5000/login", {
+      method: 'GET',
+  })
+    return await loginEmailRes.json()
+  },
 }
+
 
 //db.collection.remove()
