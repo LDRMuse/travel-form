@@ -13,4 +13,8 @@ app.use(express.json());
 
 app.use('/travel', travel);
 
+app.use((_, res) => {
+  res.status(404).send('Sorry cannot find that!');
+});
+
 app.listen(5000);
