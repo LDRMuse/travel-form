@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
-import { loginEmail } from '../db';
+import { showTravels } from '../db';
 
 const router = new Router();
 
-router.get('/login', async ({ body }, res) => {
-  const dbRes = await loginEmail(body);
+router.get('/show', async ({ body }, res) => {
+  const dbRes = await showTravels(body);
   res.status(201);
   res.json(dbRes);
 });

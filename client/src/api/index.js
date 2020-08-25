@@ -17,13 +17,16 @@ export default {
     return await res.json()
   },
 
-  async loginEmail() {
-    const loginEmailRes = await fetch("http://localhost:5000/travel/login", {
-      method: 'GET',
+  async showTravels(email) {
+    const res = await fetch("http://localhost:5000/travel/show", {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      //{email: email} = {email}
+      body: JSON.stringify({email})
   })
-    return await loginEmailRes.json()
+    return await res.json()
   },
 }
 
-
-//db.collection.remove()

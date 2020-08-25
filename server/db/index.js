@@ -18,7 +18,7 @@ export const deleteAllTravels = async () => {
   }
 };
 
-export const loginTravel = async () => {
+export const showTravels = async () => {
   try {
     const findRes = await client.db('Travel').collection('travel').find();
     return findRes;
