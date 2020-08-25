@@ -18,15 +18,20 @@ export default {
   },
 
   async showTravels(email) {
-    const res = await fetch("http://localhost:5000/travel/show", {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      //{email: email} = {email}
-      body: JSON.stringify({email})
-  })
-    return await res.json()
+    try {
+      const res = await fetch("http://localhost:5000/travel/show", {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        //{email: email} = {email}
+        body: JSON.stringify({ email })
+      })
+      return await res.json()
+    } catch (err) {
+      throw new Error(err)
+    }
+
   },
 }
 
